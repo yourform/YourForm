@@ -14,8 +14,8 @@ from sklearn.metrics import classification_report,accuracy_score,confusion_matri
 
 train_data = pd.read_csv('stroke_trainset.csv')
 test_data = pd.read_csv('stroke_testset.csv')
-train_data.drop(axis=1,columns=['avg_glucose_level'],inplace=True)
-test_data.drop(axis=1,columns=['avg_glucose_level'],inplace=True)
+train_data.drop(axis=1,columns=['id', 'avg_glucose_level'],inplace=True)
+test_data.drop(axis=1,columns=['id', 'avg_glucose_level'],inplace=True)
 
 train_data.shape
 
@@ -93,9 +93,9 @@ plt.show()
 impFeatures = pd.DataFrame((ran.feature_importances_) ,index=train_data_without_smoke.loc[:,train_data_without_smoke.columns!='stroke'].columns,columns=['Importance']).sort_values(by='Importance',ascending=False)
 print (impFeatures)
 
-'''joblib.dump(ran, 'stroke_model.joblib')
+# joblib.dump(ran, 'stroke_model.joblib')
 import pickle
 with open('model.pkl', 'wb') as model_file:
       pickle.dump(ran, model_file)
-'''
+
 train_data_without_smoke.to_csv('out')
